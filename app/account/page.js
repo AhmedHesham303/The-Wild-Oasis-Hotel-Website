@@ -1,5 +1,5 @@
 function page() {
-  return <h1>account page</div>;
+  return <h1>account page</h1>;
 }
 
 export default page;
