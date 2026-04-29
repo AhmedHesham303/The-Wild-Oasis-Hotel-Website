@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AboutImage from "@/public/about-1.jpg";
+import AboutImage from "./../../public/about-1.jpg";
 export default function Page() {
   return (
     <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
