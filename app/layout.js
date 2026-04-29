@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen`}
       >
         <Header />
-        <main className="max-w-7xl bg-red-500 mx-auto "> {children}</main>
+        <main className="max-w-7xl  mx-auto "> {children}</main>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroImg from "@/public/bg.png";
+import HeroImg from "./../public/bg.png";
 export default function Page() {
   return (
     <main className="mt-24">
