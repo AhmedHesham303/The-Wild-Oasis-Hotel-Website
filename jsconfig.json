@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "ignoreDeprecations": "5.0",
+    "ignoreDeprecations": "6.0",
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"]
