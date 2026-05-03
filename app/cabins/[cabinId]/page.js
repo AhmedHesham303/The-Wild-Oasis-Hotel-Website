@@ -1,4 +1,7 @@
+import { signIn } from "../../_lib/auth";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
+import DateSelector from "../../_components/DateSelector";
+import ReservationForm from "../../_components/ReservationForm";
 import { getCabin, getCabins } from "../../_lib/data-service";
 import Image from "next/image";
 import TextExpander from "../../_components/TextExpander";
@@ -67,8 +70,20 @@ export default async function Page({ params }) {
 
       <div>
         <h2 className="text-5xl font-semibold text-center">
-          Reserve today. Pay on arrival.
+          Reserve {name} today. Pay on arrival.
         </h2>
+        <div>
+          <DateSelector />
+          <ReservationForm />
+          <form
+            action={async () => {
+              "use server";
+              await signIn("google");
+            }}
+          >
+            <button type="submit">Signin with Google</button>
+          </form>
+        </div>
       </div>
     </div>
   );
