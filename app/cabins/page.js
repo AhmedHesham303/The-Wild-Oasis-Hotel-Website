@@ -1,11 +1,11 @@
 import { CabinList } from "../_components/CabinList";
-
+import Filter from "../_components/Filter";
 export const revalidate = 3600;
 export const metadata = {
   title: "Cabins",
 };
-export default async function Page() {
-  // CHANGE
+export default async function Page({ searchParams }) {
+  const filter = searchParams?.capacity ?? "all";
 
   return (
     <div>
@@ -20,7 +20,11 @@ export default async function Page() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
-      <CabinList />
+      <div className="flex justify-end mb-8">
+        <Filter />
+      </div>
+
+      <CabinList filter={filter} />
     </div>
   );
 }
