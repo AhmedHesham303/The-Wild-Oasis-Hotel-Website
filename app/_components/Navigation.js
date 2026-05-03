@@ -18,7 +18,6 @@ export default function Navigation() {
     },
   ];
   const pathName = usePathname();
-  console.log("path name : ", pathName);
   return (
     <nav className="z-10 text-xl">
       <ul className="flex gap-16 items-center">
