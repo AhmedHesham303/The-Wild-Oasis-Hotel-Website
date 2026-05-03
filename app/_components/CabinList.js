@@ -3,8 +3,7 @@ import CabinCard from "./CabinCard";
 
 export async function CabinList({ filter }) {
   const cabins = await getCabins();
-  let displayedCabins;
-  if (filter === "all") displayedCabins = cabins;
+  let displayedCabins = cabins;
   if (filter === "small")
     displayedCabins = cabins.filter((cabin) => cabin.maxCapacity <= 3);
   if (filter === "medium")
