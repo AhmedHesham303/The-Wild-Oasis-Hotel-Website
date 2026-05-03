@@ -38,7 +38,7 @@ function SideNavigation() {
           return (
             <li key={link.name}>
               <Link
-                className={`${href === nestedPathName ? "bg-primary-900 " : ""} py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200`}
+                className={`${link.href === pathName ? "bg-primary-900 " : ""} py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200`}
                 href={link.href}
               >
                 {link.icon}
