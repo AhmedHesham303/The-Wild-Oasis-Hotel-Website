@@ -2,9 +2,15 @@ import { signIn } from "../../_lib/auth";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import DateSelector from "../../_components/DateSelector";
 import ReservationForm from "../../_components/ReservationForm";
-import { getCabin, getCabins } from "../../_lib/data-service";
+import {
+  getBookedDatesByCabinId,
+  getCabin,
+  getCabins,
+  getSettings,
+} from "../../_lib/data-service";
 import Image from "next/image";
 import TextExpander from "../../_components/TextExpander";
+import { se } from "date-fns/locale";
 export async function generateMetadata({ params }) {
   const { name } = await getCabin(params.cabinId);
   return { title: `Cabin ${name}` };
@@ -14,13 +20,18 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const cabins = await getCabins();
   const ids = cabins.map((cabin) => ({ cabinId: String(cabin.id) }));
-  console.log(ids);
   return ids;
 }
 export default async function Page({ params }) {
-  const cabin = await getCabin(params.cabinId);
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
+  const [cabin, settings, bookedDates] = await Promise.all([
+    getCabin(params.cabinId),
+    getSettings(),
+    getBookedDatesByCabinId(params.cabinId),
+  ]);
+  console.log("settings", settings);
+  console.log("booked dates", bookedDates);
 
   return (
     <div className="max-w-6xl mx-auto mt-8">
@@ -69,20 +80,18 @@ export default async function Page({ params }) {
       </div>
 
       <div>
-        <h2 className="text-5xl font-semibold text-center">
+        <h2 className="text-5xl font-semibold text-center text-accent-400 mb-10">
           Reserve {name} today. Pay on arrival.
         </h2>
-        <div>
+        <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
           <DateSelector />
           <ReservationForm />
-          <form
+          {/* <form
             action={async () => {
               "use server";
               await signIn("google");
             }}
-          >
-            <button type="submit">Signin with Google</button>
-          </form>
+          ></form> */}
         </div>
       </div>
     </div>

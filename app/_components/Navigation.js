@@ -1,36 +1,65 @@
-"use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { auth } from "../_lib/auth";
 
-export default function Navigation() {
-  const nav = [
-    {
-      name: "Cabins",
-      href: "/cabins",
-    },
-    {
-      name: "About ",
-      href: "/about",
-    },
-    {
-      name: "Guest area",
-      href: "/account",
-    },
-  ];
-  const pathName = usePathname();
+export default async function Navigation() {
+  const session = await auth();
+  console.log(session);
+  // const nav = [
+  //   {
+  //     name: "Cabins",
+  //     href: "/cabins",
+  //   },
+  //   {
+  //     name: "About ",
+  //     href: "/about",
+  //   },
+  //   {
+  //     name: "Guest area",
+  //     href: "/account",
+  //   },
+  // ];
   return (
     <nav className="z-10 text-xl">
       <ul className="flex gap-16 items-center">
-        {nav.map((item) => (
-          <li key={item.name}>
+        <li>
+          <Link
+            href="/cabins"
+            className={`  hover:text-accent-400 transition-colors`}
+          >
+            Cabins
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/about"
+            className={`  hover:text-accent-400 transition-colors`}
+          >
+            About
+          </Link>
+        </li>
+        <li>
+          {session?.user?.image ? (
             <Link
-              href={item.href}
-              className={`${pathName === item.href ? "text-accent-400" : ""}  hover:text-accent-400 transition-colors`}
+              href={"/account"}
+              className={`hover:text-accent-400 transition-colors flex items-center gap-4`}
             >
-              {item.name}
+              <img
+                src={session?.user?.image}
+                alt={session?.user?.name}
+                referrerPolicy="no-referrer"
+                className="rounded-full h-8"
+              />
+              <span>Guest area</span>
             </Link>
-          </li>
-        ))}
+          ) : (
+            <Link
+              href={"/account"}
+              className={`  hover:text-accent-400 transition-colors`}
+            >
+              <span>Guest area</span>
+            </Link>
+          )}
+        </li>
       </ul>
     </nav>
   );

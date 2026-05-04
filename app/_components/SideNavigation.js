@@ -29,7 +29,6 @@ function SideNavigation() {
   const pathName = usePathname();
   const nestedPathName = pathName.split("/")[2] || "/";
 
-  console.log("nested path name :", nestedPathName);
   return (
     <nav className="border-r border-primary-900">
       <ul className="flex flex-col gap-2 h-full text-lg">
